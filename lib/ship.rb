@@ -7,5 +7,4 @@ class Ship
     @position = position
   end
 
-
 end

@@ -13,4 +13,11 @@ describe Board do
     expect(subject.strike "A1").to eq 'Missed hit'
   end
 
+  it 'can receive a hit on a ship' do
+    ship = double :ship, position: "A1"
+    subject.place ship
+    expect(subject.strike "A1").to eq 'Hit'
+  end
+
+
 end

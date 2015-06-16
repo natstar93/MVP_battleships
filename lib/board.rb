@@ -8,10 +8,10 @@ class Board
 
   def place ship
     @ship_array << ship
+
   end
 
   def strike position
-   "Missed hit"
   end
 
 end

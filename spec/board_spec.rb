@@ -9,4 +9,8 @@ describe Board do
     expect((subject.place(ship)).length).to eq 1
   end
 
+  it 'reports missed hit when no ship at position' do
+    expect(subject.strike "A1").to eq 'Missed hit'
+  end
+
 end

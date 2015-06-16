@@ -9,16 +9,11 @@ class Board
   end
 
   def place ship
-    @ship_array << ship.position
+    @ship_array << ship
   end
 
   def strike position
-
-    if @ship_array.include?(position)
-      "Hit"
-    else
-      "Missed hit"
-    end
+    (@ship_array.collect{|x| x.position}.include?(position)) ? "Hit" : "Missed hit"
   end
 
 

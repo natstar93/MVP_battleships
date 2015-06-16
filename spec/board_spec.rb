@@ -6,7 +6,7 @@ describe Board do
 
   it 'can have a ship' do
     ship = double :ship, position: "A1"
-    expect((subject.place(ship)).length).to eq 1
+    expect(subject.place(ship).length).to eq 1
   end
 
   it 'reports missed hit when no ship at position' do
@@ -18,6 +18,4 @@ describe Board do
     subject.place ship
     expect(subject.strike "A1").to eq 'Hit'
   end
-
-
 end

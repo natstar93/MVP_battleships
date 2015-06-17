@@ -10,7 +10,7 @@ describe Board do
   end
 
   it 'reports missed hit when no ship at position' do
-    expect(subject.strike "A1").to eq 'Missed hit'
+    expect(subject.strike "A1").to eq :miss
   end
 
   it 'can receive a hit on a ship' do
@@ -18,20 +18,20 @@ describe Board do
     subject.place ship
     ship = double :ship, position: "B1"
     subject.place ship
-    expect(subject.strike "A1").to eq 'Hit'
+    expect(subject.strike "A1").to eq :hit
   end
 
   it 'can report if all ships are sunk' do
     ship = double :ship, position: "A1"
     subject.place ship
     subject.strike "A1"
-    expect(subject.all_sunk?).to eq 'All sunk'
+    expect(subject.all_sunk?).to eq true
   end
 
   it 'can report if not all ships are sunk' do
     ship = double :ship, position: "A1"
     subject.place "B2"
-    expect(subject.not_all_sunk?).to eq 'Not all sunk'
+    expect(subject.all_sunk?).to eq false
   end
 
 end

@@ -2,6 +2,7 @@
 class Ship
 
   attr_reader :position
+  attr_accessor :hits
   attr_accessor :sunk
 
   def initialize position, direction
@@ -12,20 +13,14 @@ class Ship
     @size = 1
   end
 
-  def hit position
-  	@hits += 1
-  	if @hits == @size
-  	  sink
-  	end
-  	return @hits
+  def hit
+  	times_hit
+  	sink if @hits == @size
+  	:hit
   end
 
-  def miss position
-    'Miss'
-  end
-
-  def second_hit position
-    'No more chance'
+  def miss
+    :miss
   end
 
   def sink
@@ -34,6 +29,10 @@ class Ship
 
   def sunk?
   	@sunk
+  end
+
+  def times_hit
+  	@hits += 1
   end
 
 end

@@ -3,23 +3,27 @@ require_relative 'ship'
 class Board
 
   attr_accessor :ships
+  attr_accessor :hits
+  attr_accessor :misses
 
   def initialize
    @ships = []
+   @hits = []
+   @misses = []
 
-   #          A   B   C   D   E   F   G   H   I   J
-   @grid = [['w','w','w','w','w','w','w','w','w','w'],
-            ['w','w','w','w','w','w','w','w','w','w'],
-            ['w','w','w','w','w','w','w','w','w','w'],
-            ['w','w','w','w','w','w','w','w','w','w'],
-            ['w','w','w','w','w','w','w','w','w','w'],
-            ['w','w','w','w','w','w','w','w','w','w'],
-            ['w','w','w','w','w','w','w','w','w','w'],
-            ['w','w','w','w','w','w','w','w','w','w'],
-            ['w','w','w','w','w','w','w','w','w','w'],
-            ['w','w','w','w','w','w','w','w','w','w'],]
-   #@ships = {'destroyer' => 2, 'cruiser' => 3, 'submarine' => 3, 'battleship' => 4, 'aircraft carrier' => 5} #Why can't we use the symbol creator?
-   @alphabet = ('a'..'j').to_a
+   # #          A   B   C   D   E   F   G   H   I   J
+   # @grid = [['w','w','w','w','w','w','w','w','w','w'],
+   #          ['w','w','w','w','w','w','w','w','w','w'],
+   #          ['w','w','w','w','w','w','w','w','w','w'],
+   #          ['w','w','w','w','w','w','w','w','w','w'],
+   #          ['w','w','w','w','w','w','w','w','w','w'],
+   #          ['w','w','w','w','w','w','w','w','w','w'],
+   #          ['w','w','w','w','w','w','w','w','w','w'],
+   #          ['w','w','w','w','w','w','w','w','w','w'],
+   #          ['w','w','w','w','w','w','w','w','w','w'],
+   #          ['w','w','w','w','w','w','w','w','w','w'],]
+   # #@ships = {'destroyer' => 2, 'cruiser' => 3, 'submarine' => 3, 'battleship' => 4, 'aircraft carrier' => 5} #Why can't we use the symbol creator?
+   # @alphabet = ('a'..'j').to_a
 
   end
 
@@ -29,19 +33,25 @@ class Board
 
   def strike position
     if (@ships.collect{|x| x.position}.include?(position)) 
-      @ships.pop
-      "Hit"
+      report_hit position
+      :hit
     else
-      "Missed hit"
+      report_miss position
+      :miss
     end
      # 
   end
+  
+  def report_hit position
+    @hits << @ships.delete_at(@ships.index { |ship| position })
+  end
+
+  def report_miss position
+    @misses << position
+  end
 
   def all_sunk?
-     'All sunk' if (@ships.length == 0) 
-  end
-  def not_all_sunk?
-     'Not all sunk' if (@ships.length != 0) 
+     (@ships.length == 0) ? true : false
   end
 
 end

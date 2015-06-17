@@ -1,7 +1,7 @@
 
 class Ship
 
-  attr_accessor :position
+  attr_reader :position
 
   def initialize position
     @position = position

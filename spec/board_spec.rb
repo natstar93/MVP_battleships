@@ -16,6 +16,22 @@ describe Board do
   it 'can receive a hit on a ship' do
     ship = double :ship, position: "A1"
     subject.place ship
+    ship = double :ship, position: "B1"
+    subject.place ship
     expect(subject.strike "A1").to eq 'Hit'
   end
+
+  it 'can report if all ships are sunk' do
+    ship = double :ship, position: "A1"
+    subject.place ship
+    subject.strike "A1"
+    expect(subject.all_sunk?).to eq 'All sunk'
+  end
+
+  it 'can report if not all ships are sunk' do
+    ship = double :ship, position: "A1"
+    subject.place "B2"
+    expect(subject.not_all_sunk?).to eq 'Not all sunk'
+  end
+
 end

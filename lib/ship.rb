@@ -2,8 +2,8 @@
 class Ship
 
   attr_reader :position
-  attr_accessor :hits
-  attr_accessor :sunk
+  #attr_accessor :hits
+  #attr_accessor :sunk
 
   def initialize position, direction
     @position = position

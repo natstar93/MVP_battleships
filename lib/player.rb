@@ -14,8 +14,8 @@ class Player
 	  :lose
 	end
 
-	def place ship, position, direction
-	  self.board.ships << ship.new(position, direction)
+	def place position, direction
+	  board.ships << Ship.new(position, direction)
 	end
 
 	def receive_hit position

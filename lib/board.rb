@@ -10,25 +10,15 @@ class Board
    @ships = []
    @hits = []
    @misses = []
-
-   # #          A   B   C   D   E   F   G   H   I   J
-   # @grid = [['w','w','w','w','w','w','w','w','w','w'],
-   #          ['w','w','w','w','w','w','w','w','w','w'],
-   #          ['w','w','w','w','w','w','w','w','w','w'],
-   #          ['w','w','w','w','w','w','w','w','w','w'],
-   #          ['w','w','w','w','w','w','w','w','w','w'],
-   #          ['w','w','w','w','w','w','w','w','w','w'],
-   #          ['w','w','w','w','w','w','w','w','w','w'],
-   #          ['w','w','w','w','w','w','w','w','w','w'],
-   #          ['w','w','w','w','w','w','w','w','w','w'],
-   #          ['w','w','w','w','w','w','w','w','w','w'],]
-   # #@ships = {'destroyer' => 2, 'cruiser' => 3, 'submarine' => 3, 'battleship' => 4, 'aircraft carrier' => 5} #Why can't we use the symbol creator?
-   # @alphabet = ('a'..'j').to_a
-
   end
 
   def place ship
-    @ships << ship
+
+    if (@ships.collect{|x| x.position}.include?(ship.position)) 
+      fail 'Position occupied'
+    else
+      @ships << ship
+    end
   end
 
   def strike position
@@ -43,7 +33,8 @@ class Board
   end
   
   def report_hit position
-    @hits << @ships.delete_at(@ships.index { |ship| position })
+    @ships.delete_at(@ships.index { |ship| ship.position })
+    @hits << position
   end
 
   def report_miss position
